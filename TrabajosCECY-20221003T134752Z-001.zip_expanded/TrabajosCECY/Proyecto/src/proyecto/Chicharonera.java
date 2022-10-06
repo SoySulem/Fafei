@@ -1,0 +1,167 @@
+package proyecto;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+
+public class Chicharonera {
+
+	private JFrame frmChicharronera;
+	private JLabel lblNewLabel;
+	private JLabel lblResultado;
+	private JSlider sldValorC;
+	private JLabel lblValorC;
+	private JSlider sldValorB;
+	private JLabel lblValorB;
+	private JSlider sldValorA;
+	private JLabel lblValorA;
+	int a = 0, b = 0, c = 0;
+	double x = 0, x2 = 0;
+	private JLabel lblecuacion;
+	
+	
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Chicharonera window = new Chicharonera();
+					window.frmChicharronera.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Chicharonera() {
+		initialize();
+	}
+		 public double redondiar(double numero){
+	           return Math.round(numero*100.0)/100.0;
+	       }
+	
+	public void calcular() {
+        try {
+            lblecuacion.setText(a + "x2" + b + "x+" + c + "=0");
+            int valor = (b * b) - (4 * a * c);
+            if (valor > 0) {
+                x = (-b + Math.sqrt(valor)) / (2 * a);
+                x2 = (-b + Math.sqrt(valor)) / (2 * a);
+                lblResultado.setText(" X1= " +redondiar (x) + " X2=" +redondiar(x2));
+            } else if (valor == 0) {
+                x = (-b) / (2 * a);
+
+                lblResultado.setText("X1=" +redondiar(x));
+            } else if (valor < 0) {
+            	lblResultado.setText("no hay solucion");
+            }
+        } catch (Exception ex) {
+
+        }
+    }
+
+
+	private void initialize() {
+		frmChicharronera = new JFrame();
+		frmChicharronera.setTitle("Chicharronera");
+		frmChicharronera.setBounds(100, 100, 450, 409);
+		frmChicharronera.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmChicharronera.getContentPane().setLayout(null);
+		frmChicharronera.setIconImage(Toolkit.getDefaultToolkit().getImage(Calculadora.class.getResource("/img/f.JPG")));
+		
+		lblNewLabel = new JLabel("Valor de A");
+		lblNewLabel.setBounds(10, 11, 118, 27);
+		frmChicharronera.getContentPane().add(lblNewLabel);
+		
+		lblValorA = new JLabel("0");
+		lblValorA.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblValorA.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblValorA.setBounds(230, 38, 67, 37);
+		frmChicharronera.getContentPane().add(lblValorA);
+		
+		lblValorB = new JLabel("0");
+		lblValorB.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblValorB.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblValorB.setBounds(230, 104, 67, 37);
+		frmChicharronera.getContentPane().add(lblValorB);
+		
+		lblValorC = new JLabel("0");
+		lblValorC.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblValorC.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblValorC.setBounds(230, 171, 67, 37);
+		frmChicharronera.getContentPane().add(lblValorC);
+		
+		sldValorA = new JSlider();
+		sldValorA.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				a = sldValorA.getValue();
+		        lblValorA.setText("" + a);
+		        calcular();
+			}
+		});
+		sldValorA.setMaximum(50);
+		sldValorA.setMinimum(-50);
+		sldValorA.setBounds(20, 49, 200, 26);
+		frmChicharronera.getContentPane().add(sldValorA);
+		//1
+		
+		
+		JLabel lblNewLabel_2 = new JLabel("Valor de A");
+		lblNewLabel_2.setBounds(10, 77, 118, 27);
+		frmChicharronera.getContentPane().add(lblNewLabel_2);
+		
+		sldValorB = new JSlider();
+		sldValorB.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				b = sldValorB.getValue();
+		        lblValorB.setText("" + b);
+		        calcular();
+			}
+		});
+		sldValorB.setMinimum(-50);
+		sldValorB.setMaximum(50);
+		sldValorB.setBounds(20, 115, 200, 26);
+		frmChicharronera.getContentPane().add(sldValorB);
+		//2
+		
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Valor de A");
+		lblNewLabel_2_1.setBounds(10, 152, 118, 27);
+		frmChicharronera.getContentPane().add(lblNewLabel_2_1);
+		//3
+		sldValorC = new JSlider();
+		sldValorC.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				c = sldValorC.getValue();
+		        lblValorC.setText("" + c);
+		        calcular();
+			}
+		});
+		sldValorC.setMinimum(-50);
+		sldValorC.setMaximum(50);
+		sldValorC.setBounds(20, 182, 200, 26);
+		frmChicharronera.getContentPane().add(sldValorC);
+		
+		
+		
+		lblResultado = new JLabel("");
+		lblResultado.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblResultado.setBounds(72, 289, 259, 27);
+		frmChicharronera.getContentPane().add(lblResultado);
+		
+		lblecuacion = new JLabel("");
+		lblecuacion.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblecuacion.setBounds(72, 238, 259, 27);
+		frmChicharronera.getContentPane().add(lblecuacion);
+	}
+}

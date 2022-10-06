@@ -1,0 +1,84 @@
+package proyecto;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JSpinner;
+import java.awt.BorderLayout;
+import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Tablas {
+
+	private JFrame frmTablas;
+	private JTextArea textArea;
+	private JSpinner spinner;
+	private JButton btnBorrar;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tablas window = new Tablas();
+					window.frmTablas.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Tablas() {
+		initialize();
+	}
+
+	private void initialize() {
+		frmTablas = new JFrame();
+		frmTablas.setTitle("Tablas");
+		frmTablas.setBounds(100, 100, 450, 300);
+		frmTablas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTablas.getContentPane().setLayout(null);
+		
+		spinner = new JSpinner();
+		spinner.addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+				   int n=Integer.parseInt(spinner.getValue().toString());
+			       System.out.println("numero: "+n);
+			       String tablas="";
+			        for (int i = 1; i < 10; i++) {
+			            tablas+=n+" x "+i+" = "+(n*i)+"\n";  
+			        }
+			        textArea.setText(tablas);
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+		});
+		spinner.setBounds(200, 27, 128, 20);
+		frmTablas.getContentPane().add(spinner);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(79, 58, 221, 136);
+		frmTablas.getContentPane().add(textArea);
+		
+		JLabel lblNumero = new JLabel("Numero");
+		lblNumero.setBounds(57, 30, 46, 14);
+		frmTablas.getContentPane().add(lblNumero);
+		
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 textArea.setText("");
+				 
+			}
+		});
+		btnBorrar.setBounds(153, 205, 89, 23);
+		frmTablas.getContentPane().add(btnBorrar);
+	}
+}

@@ -1,0 +1,109 @@
+package proyecto;
+
+import java.awt.EventQueue;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Colores {
+
+	private JFrame frmColores;
+	private JRadioButton radrojo;
+	private JRadioButton radverde;
+	private JRadioButton radazul;
+	private JRadioButton radnegro;
+	private JLabel lblColor;
+	ButtonGroup grupo=new ButtonGroup();
+ 
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Colores window = new Colores();
+					window.frmColores.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Colores() {
+		initialize();
+		grupo.add(radrojo);
+		grupo.add(radverde);
+		grupo.add(radazul);
+		grupo.add(radnegro);
+	}
+ 
+	public void cambiarColor() {
+		if(radrojo.isSelected())lblColor.setBackground(Color.red);
+		if(radverde.isSelected())lblColor.setBackground(Color.green);
+		if(radazul.isSelected())lblColor.setBackground(Color.blue);
+		if(radnegro.isSelected())lblColor.setBackground(Color.black);
+		
+	}
+	
+	private void initialize() {
+		frmColores = new JFrame();
+		frmColores.setTitle("Colores");
+		frmColores.setBounds(100, 100, 450, 300);
+		frmColores.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmColores.getContentPane().setLayout(null);
+		
+		lblColor = new JLabel("");
+		lblColor.setOpaque(true);
+		lblColor.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblColor.setBounds(151, 11, 227, 223);
+		frmColores.getContentPane().add(lblColor);
+		
+		radrojo = new JRadioButton("Rojo");
+		radrojo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cambiarColor();
+			}
+		});
+		radrojo.setBounds(23, 11, 109, 23);
+		frmColores.getContentPane().add(radrojo);
+		
+		radverde = new JRadioButton("Verde");
+		radverde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cambiarColor();
+			}
+		});
+		radverde.setBounds(23, 50, 109, 23);
+		frmColores.getContentPane().add(radverde);
+		
+		radazul = new JRadioButton("Azul");
+		radazul.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cambiarColor();
+			}
+		});
+		radazul.setBounds(23, 85, 109, 23);
+		frmColores.getContentPane().add(radazul);
+		
+		radnegro = new JRadioButton("Negro");
+		radnegro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cambiarColor();
+			}
+		});
+		radnegro.setBounds(23, 129, 109, 23);
+		frmColores.getContentPane().add(radnegro);
+		
+		
+		
+		
+		
+		
+	}
+
+}

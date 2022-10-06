@@ -1,0 +1,97 @@
+package proyecto;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+
+public class CheckBox {
+
+	private JFrame frmCheckbox;
+	private JCheckBox chkCredencial;
+	private JCheckBox chkUniforme;
+	private JCheckBox chkCubrebocas;
+	private JLabel lblQueTrae;
+	private JLabel lblCumple;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CheckBox window = new CheckBox();
+					window.frmCheckbox.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public CheckBox() {
+		initialize();
+	}
+	public void checarAlumno() {
+		String quetrae="";
+		if(chkUniforme.isSelected()) {
+		   quetrae+="Si uniforme";
+		}else {
+		quetrae+="NO uniforme";
+		}
+		if(chkCredencial.isSelected()) {
+		   quetrae+=" Si Credencial";
+		}else {
+		quetrae+=" NO Credencial";
+		}
+		if(chkCubrebocas.isSelected()) {
+		   quetrae+=" Si Cubrebocas";
+		}else {
+		quetrae+=" NO Cubrebocas";
+		}
+		lblQueTrae.setText(quetrae);
+		if(chkUniforme.isSelected()&&chkCredencial.isSelected()&&chkCubrebocas.isSelected()) {
+			lblCumple.setText("Si cumple y pasa");
+		}else{
+			lblCumple.setText("No cumple y no pasa");
+		}
+
+		}
+
+	private void initialize() {
+		frmCheckbox = new JFrame();
+		frmCheckbox.setTitle("CheckBox");
+		frmCheckbox.setBounds(100, 100, 450, 300);
+		frmCheckbox.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCheckbox.getContentPane().setLayout(null);
+		
+		checarAlumno();
+		chkUniforme = new JCheckBox("Uniforme");
+		chkUniforme.setBounds(6, 22, 97, 23);
+		frmCheckbox.getContentPane().add(chkUniforme);
+		
+		checarAlumno();
+		chkCredencial = new JCheckBox("Credencial");
+		chkCredencial.setBounds(6, 70, 97, 23);
+		frmCheckbox.getContentPane().add(chkCredencial);
+		
+		checarAlumno();
+		chkCubrebocas = new JCheckBox("Cubrebocas");
+		chkCubrebocas.setBounds(6, 117, 97, 23);
+		frmCheckbox.getContentPane().add(chkCubrebocas);
+		
+		checarAlumno();
+		lblQueTrae = new JLabel("");
+		lblQueTrae.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblQueTrae.setBounds(79, 147, 192, 35);
+		frmCheckbox.getContentPane().add(lblQueTrae);
+		
+		checarAlumno();
+		lblCumple = new JLabel("");
+		lblCumple.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblCumple.setBounds(79, 193, 192, 35);
+		frmCheckbox.getContentPane().add(lblCumple);
+		
+	}
+}
